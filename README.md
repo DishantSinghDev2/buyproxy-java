@@ -1,6 +1,5 @@
 # BuyProxy Java SDK — Residential Proxy API Client for the JVM
 
-[![Maven Central](https://img.shields.io/maven-central/v/org.buyproxy/buyproxy?logo=apachemaven&logoColor=white)](https://central.sonatype.com/artifact/org.buyproxy/buyproxy)
 [![CI](https://github.com/DishantSinghDev2/buyproxy-java/actions/workflows/ci.yml/badge.svg)](https://github.com/DishantSinghDev2/buyproxy-java/actions/workflows/ci.yml)
 ![Java](https://img.shields.io/badge/Java-17%2B-orange)
 [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
@@ -18,21 +17,7 @@ The official **Java SDK** for [BuyProxy](https://www.buyproxy.org): generate **r
 
 ## Installation
 
-**Maven**
-
-```xml
-<dependency>
-  <groupId>org.buyproxy</groupId>
-  <artifactId>buyproxy</artifactId>
-  <version>1.0.0</version>
-</dependency>
-```
-
-**Gradle**
-
-```kotlin
-implementation("org.buyproxy:buyproxy:1.0.0")
-```
+The `org.buyproxy:buyproxy` package isn't on Maven Central yet.
 
 Java 17+. Depends only on Jackson (`jackson-databind`) and `jspecify` annotations.
 
@@ -45,9 +30,9 @@ BuyProxy bp = BuyProxy.builder().apiKey(System.getenv("BUYPROXY_API_KEY")).build
 
 var plan = bp.plans().list().get(0);
 GeneratedProxies result = bp.plans().generate(plan.id(),
-        GenerateParams.create().country("US").city("Austin").count(5));
+        GenerateParams.create().country("US").count(5));
 
-System.out.println(result.get(0).url()); // http://user-country-us-city-austin:pass@gw.buyproxy.org:6969
+System.out.println(result.get(0).url()); // http://user-country-us:pass@gw.buyproxy.org:6969
 ```
 
 Add `.stickyMinutes(10)` to keep the same IP for ten minutes, or `.protocol("socks5")` for SOCKS5.
@@ -181,7 +166,7 @@ Create a free account at [buyproxy.org](https://www.buyproxy.org/signup), then o
 A personal key (`bp_key_…`) manages your own bandwidth: balances, plans, generating proxies, top-ups and payments. A reseller key (`bp_live_…`) manages *your customers*: create isolated sub-accounts, buy bandwidth into a pool, allocate it, suspend or reactivate, and generate proxies on their behalf.
 
 **Which proxy types are available?**
-Core Residential, Premium Residential, ISP Rotating, Mobile, Datacenter IPv4 and IPv6 — call the catalog endpoint for the live list and per-GB prices (from **$1.99/GB**).
+Core Residential, Premium Residential, ISP Rotating, Mobile, Datacenter IPv4 and IPv6 — call the catalog endpoint for the live list and per-GB prices (residential from **$0.99/GB**, IPv6 from **$0.29/GB**).
 
 **Do generated proxies expire, and when is bandwidth used?**
 Generating a proxy is free and instant; bandwidth is only consumed when traffic flows through it. Lines are on-demand — generate fresh ones rather than storing them.
